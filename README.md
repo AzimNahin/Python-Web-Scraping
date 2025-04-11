@@ -1,122 +1,96 @@
 
-# 🕸️ Web Scraping Project: Public Company Data Extraction
+# 📊 Web Scraping of Fortune 500 Companies from Wikipedia
 
-This project is a demonstration of how to use **Python** to scrape structured data from a live webpage using `requests`, `BeautifulSoup`, and `pandas`. The goal is to collect tabular data of the largest public companies in the United States by revenue from Wikipedia and save the data into a structured CSV file.
-
----
-
-## 📘 Project Description
-
-# Import Libraries
-
-# Fetch the Page
-
-
-# Fetch the Tables
-
-# Fetch Table Headers
-
-# Create Dataframe
-
-# Insert Data into Dataframe
-
-# Convert to CSV
+This project scrapes financial and organizational data of the top public companies in the U.S. based on revenue, directly from Wikipedia. It processes the first table listed on the Wikipedia page for Fortune 500 companies and stores the clean data into a structured CSV format for further analysis.
 
 ---
 
-## 💻 Extracted Code
+## 📁 Project Structure
 
-```python
-from bs4 import BeautifulSoup
-import requests
-import pandas as pd
 ```
-
-```python
-url = 'https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue'
-response = requests.get(url)
-
-soup = BeautifulSoup(response.text,'html')
-print(soup)
-```
-
-```python
-table = soup.find_all('table')
-table1, table2, table3 = table
-```
-
-```python
-table_headers = table1.find_all('th')
-
-table_headers = [header.text.strip() for header in table_headers]
-
-print(table_headers)
-```
-
-```python
-df = pd.DataFrame(columns=table_headers)
-print(df)
-print(len(df))
-```
-
-```python
-rows = table1.find_all('tr')[1:]
-
-for row in rows:
-    columns = row.find_all('td')
-    columns = [column.text.strip() for column in columns]
-    location = len(df)
-    df.loc[location] = columns
-
-print(df)
-```
-
-```python
-path = 'D:\Python\Public_Company_List.csv'
-df.to_csv(path, index = False)
+.
+├── Web_Scraping.ipynb          # Jupyter Notebook containing scraping and data cleaning logic
+├── Public_Company_List.csv     # Final output CSV file with company data
+└── README.md                   # Project documentation (this file)
 ```
 
 ---
 
-## 📁 Output
+## 📌 What This Project Does
 
-The notebook creates an output file:
-
-- `Public_Company_List.csv` – A CSV containing structured data of companies scraped from Wikipedia.
+✅ Automates retrieval of Fortune 500 company data from Wikipedia  
+✅ Extracts structured data from the **first HTML table** on the page  
+✅ Dynamically reads and stores table headers  
+✅ Cleans the extracted table rows and standardizes them  
+✅ Converts the data into a well-formatted `pandas.DataFrame`  
+✅ Saves the final dataset as `Public_Company_List.csv` in local storage
 
 ---
 
-## 🧰 Dependencies
+## 🔍 Extracted Fields
 
-Install the required Python libraries before running the notebook:
+The CSV file contains the following columns, as dynamically extracted from the table headers:
+
+- Rank
+- Name
+- Industry
+- Revenue
+- Profit
+- Employees
+- Headquarters
+- and possibly other metadata depending on Wikipedia's table structure
+
+The structure of the table may vary over time, but this notebook adapts by programmatically parsing the headers.
+
+---
+
+## 🧪 Technologies Used
+
+- **Python 3**
+- **Jupyter Notebook** — for step-by-step documentation and reproducibility
+- **pandas** — for handling tabular data
+- **requests** — for fetching webpage content
+- **BeautifulSoup4** — for HTML parsing and table extraction
+
+---
+
+## 🚀 How to Run
+
+### 1. Install Dependencies
+
+You can install the necessary Python libraries using pip:
 
 ```bash
-pip install beautifulsoup4 requests pandas
+pip install pandas requests beautifulsoup4
 ```
 
----
+### 2. Open the Notebook
 
-## 📌 Usage
+Open `Web_Scraping.ipynb` in [Jupyter Notebook](https://jupyter.org/) or Jupyter Lab.
 
-1. Open the `Web_Scraping.ipynb` notebook.
-2. Run each cell step-by-step to:
-   - Fetch the HTML content of the Wikipedia page.
-   - Extract the relevant table.
-   - Convert it into a clean pandas DataFrame.
-   - Export the data to a CSV file.
-3. Use the resulting CSV file for analysis or visualization.
+### 3. Run the Cells
 
----
+Run all cells sequentially. This will:
+- Fetch the Wikipedia page
+- Parse the HTML table
+- Create a clean dataset
+- Save the output as `Public_Company_List.csv`
 
-## 📝 Notes
-
-- Ensure that the structure of the Wikipedia page hasn't changed, or table parsing may need to be adjusted.
-- This notebook is ideal for beginners learning data scraping and transformation.
+The final dataset will be saved to your working directory.
 
 ---
 
-## 🚀 Future Improvements
+## 📂 Output Description
 
-- Add support for scraping multiple years or tables.
-- Automate table selection using table titles or structure.
-- Enhance data cleaning and type conversion.
+**`Public_Company_List.csv`**  
+A structured CSV file containing financial and organizational details of the top U.S. companies, including:
+
+| Rank | Name | Industry | Revenue | Profit | Employees | Headquarters |
+|------|------|----------|---------|--------|-----------|---------------|
+| 1    | Walmart | Retail | $600B   | $13.7B | 2,300,000 | Arkansas      |
+| ...  | ...      | ...      | ...     | ...    | ...         | ...           |
+
+---
+
+## 👨‍💻 Contributors
+- [Azim Nahin](https://github.com/AzimNahin)
