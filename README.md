@@ -1,5 +1,5 @@
 
-# 📊 Web Scraping of Fortune 500 Companies from Wikipedia
+# 🕸️ Web Scraping Financial Data of U.S. Public Companies
 
 This project scrapes financial and organizational data of the top public companies in the U.S. based on revenue, directly from Wikipedia. It processes the first table listed on the Wikipedia page for Fortune 500 companies and stores the clean data into a structured CSV format for further analysis.
 
