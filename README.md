@@ -92,5 +92,5 @@ A structured CSV file containing financial and organizational details of the top
 
 ---
 
-## 👨‍💻 Contributors
+## 👨‍💻 Contributor
 - [Azim Nahin](https://github.com/AzimNahin)
